@@ -29,8 +29,19 @@ def amountNeeded_TO_MAX(INGREDIENTS_ID):
     if (result[0] == True):
         return result[1][0][0] - result[1][0][1]
     
+# COMPLETED 
+def getMIN(INGREDIENTS_ID):
+    query1 = f"SELECT MIN_AMOUNT FROM INGREDIENTS WHERE INGREDIENT_ID = {INGREDIENTS_ID}"
     
+    result = start.executeQuery(query=query1)
     
+    if (result[0] == False):
+        return result
+    
+    if (result[0] == True):
+        return result[1][0][0]
+    
+
 
 
 # COMPLETED
