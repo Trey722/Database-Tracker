@@ -94,6 +94,29 @@ def checkEnough(INGREDIENTS_ID, amountNeeded):
     else:
         return [True, True]
     
+
+def editPrice(INGREDIENTS_ID, NEW_PRICE):
+    query1 = f"UPDATE INGREDIENTS SET COST = {NEW_PRICE} WHERE INGREDIENT_ID = {INGREDIENTS_ID}"
+    
+    result = start.executeQuery(query=query1)
+    
+    return result 
+
+
+def getCost(INGREDIENTS_ID):
+    query1 = f"SELECT COST FROM INGREDIENTS WHERE INGREDIENT_ID = {INGREDIENTS_ID}"
+    
+    result = start.executeQuery(query=query1)
+    
+    if (result[0] == False):
+        return result 
+    
+    if (result[0] == True):
+        result[1] = result[1][0][0]
+    
+    return result
+
+    
     
 
 

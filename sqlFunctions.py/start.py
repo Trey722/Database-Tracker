@@ -1,4 +1,6 @@
 
+global PASSWORD 
+PASSWORD = "TD6812"
 
 
 import pymysql
