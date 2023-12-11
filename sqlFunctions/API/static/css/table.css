@@ -1,0 +1,15 @@
+table {
+    display: none;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 12px; /* Increase cell padding */
+    text-align: left;
+    font-size: 18px; /* Increase font size */
+}
+
+th {
+    background-color: #f2f2f2; /* Background color for header cells */
+}

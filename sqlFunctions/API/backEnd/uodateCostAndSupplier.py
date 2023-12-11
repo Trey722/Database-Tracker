@@ -1,7 +1,10 @@
-import start
-import supplierQueiries
-import ingridentQueries
-# This function will update where an ingrident comes from and the cost
+import backEnd.start as start
+import backEnd.supplierQueiries as supplierQueiries
+import backEnd.ingridentQueries as ingridentQueries
+
+
+
+
 def updateIngrident(INGRIDENT_ID, NEW_PRICE=None, New_Supplier_ID=None):
     status = []
     if (New_Supplier_ID != None):

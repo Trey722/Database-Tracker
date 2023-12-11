@@ -1,9 +1,9 @@
-import functions
+import backEnd.functions as functions
 
-import productQueriies
-import requestQueries
-import ingridentQueries
-
+import backEnd.productQueriies as productQueriies
+import backEnd.requestQueries as requestQueries
+import backEnd.ingridentQueries as ingridentQueries
+from backEnd import start
 """
 
 A customer requests an Order
@@ -32,7 +32,7 @@ def createCustomerOrder(CUSTOMER_ID, PRODUCTS, GOAL_READY_BY, ORDER_ID=False): #
     
     # AN order ID is generated
     if (ORDER_ID == False):
-        ORDER_ID = int(functions.generate_unique_id(str(CUSTOMER_ID + PRODUCTS[0])))
+        ORDER_ID = int(functions.generate_unique_id(str(CUSTOMER_ID)))
     
     
         
@@ -91,6 +91,44 @@ def createCustomerOrder(CUSTOMER_ID, PRODUCTS, GOAL_READY_BY, ORDER_ID=False): #
     for i in range(len(PRODUCTS)):
         requestQueries.addProdcuts_TO_REQUESTS_Contents(ORDER_ID=ORDER_ID, PRODUCT_ID=PRODUCTS[i])
         
-    return True
+    return [True, ORDER_ID]
         
+        
+def searchOrder(ORDER_ID):
+    try:
+        ORDER_ORDER = int(ORDER_ID)
+        query = f"SELECT * FROM REQUESTS WHERE ORDER_ID = {ORDER_ID}"
+    except:
+        query = "SELECT * FROM REQUESTS"
+    
+    result = start.executeQuery(query)
+    
+    if result[0] == True:
+        modified_result = []
+        for row in result[1]:
+            if row[3] == b'\x00':
+                modified_result.append(row[:3] + (0,) + row[4:])
+            else:
+                modified_result.append(row[:3] + (1,) + row[4:])
+        
+        # Creating a new tuple with the modified result list
+        result = (result[0], tuple(modified_result))
+
+    return result
+
+
+def searchOrderContents(ORDER_ID):
+    try:
+        ORDER_ORDER = int(ORDER_ID)
+        query = f"SELECT * FROM REQUEST_CONTENTS WHERE REQUEST_ID = {ORDER_ID}"
+    except:
+        query = "SELECT * FROM REQUESTS"
+    
+    result = start.executeQuery(query)
+
+
+    return result
+
+
+
     
