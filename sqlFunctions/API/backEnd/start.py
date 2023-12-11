@@ -1,18 +1,50 @@
 
-global PASSWORD 
-PASSWORD = "TD6812"
 
+global PASSWORD 
+PASSWORD = None
+global USER 
+USER = 'root'
+global DATABASE
+DATABASE = 'TRACKER'
+global port
+port = 3306
 
 import pymysql
 
-# Establish a connection
-connection = pymysql.connect(
-    host='localhost',
-    user='root',
-    password=PASSWORD,
-    database='TRACKER',
-    port=3306  # Change the port number if necessary
-)
+
+def addConnectInfo(USER_d, DATABASE_d, PASSWORD_d, PORT_D):
+    if USER_d != None:
+        global USER 
+        USER = USER_d
+        
+    if DATABASE_d != None:
+        global DATABASE
+        DATABASE = DATABASE_d
+        
+    if PASSWORD_d != None:
+        global PASSWORD
+        PASSWORD = PASSWORD_d
+        
+    if PORT_D != None:
+        return PORT_D
+    
+
+connection = None  
+
+def establish_connection():
+    global connection
+    if connection is None:
+        connection = pymysql.connect(
+                host='localhost',
+                user=USER,
+                password=PASSWORD,
+                database=DATABASE,
+                port=port)
+    try:
+        cursor = connection.cursor()
+        return [True]
+    except:
+        return  [False, "Fialed to connect"]
 
 def dropAllTABLES():
     
@@ -93,6 +125,14 @@ def executeQuery(query):
         return [True, result]
     except:
         return [False, "Failed to fetch data"]
+    
+def getColumns(TABLE):
+    print(TABLE)
+    query = f"SHOW COLUMNS FROM {TABLE}"
+    
+    result = executeQuery(query)
+    return result
+    
     
     
 

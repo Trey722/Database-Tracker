@@ -1,4 +1,4 @@
-import start
+from backEnd import start
 
 # COMPLETED
 def addSupplier(SUPPLIER_ID, SUPPLIER_NAME):
@@ -7,6 +7,29 @@ def addSupplier(SUPPLIER_ID, SUPPLIER_NAME):
     result = start.executeQuery(query1)
     
     return result
+
+
+def searchSupplier(SUPPLIER_ID):
+    try:
+        SUPPLIER_ID = int(SUPPLIER_ID)
+        query = f"SELECT * FROM SUPPLIER WHERE SUPPLIER_ID = {SUPPLIER_ID}"
+    except:
+        query = "SELECT * FROM SUPPLIER"
+    
+    result = start.executeQuery(query)
+    
+    return result
+
+def searchIG_SUPPLY(INGRIEDNT_ID):
+    try:
+        INGRIEDNT_ID = int(INGRIEDNT_ID)
+        query = f"SELECT * FROM SUPPLIER_SUPPLIES WHERE INGRIEDNT_ID = {INGRIEDNT_ID}"
+    except:
+        query = "SELECT * FROM SUPPLIER_SUPPLIES"
+        
+    reuslt = start.executeQuery(query)
+    
+    return reuslt
 
 # COMPLETED
 def addIngridnetSupply(INGRIEDNT_ID, SUPPLIER_ID):

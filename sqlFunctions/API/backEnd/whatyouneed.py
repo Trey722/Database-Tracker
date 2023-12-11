@@ -1,5 +1,5 @@
-import start 
-import ingridentQueries
+import backEnd.start as start 
+import backEnd.ingridentQueries as ingridentQueries
 
 
 # This funciton returns what you need and how much when you input the SUPPLIER

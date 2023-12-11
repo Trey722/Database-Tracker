@@ -1,7 +1,7 @@
-import functions as func
+import backEnd.functions as func
 
 
-import start
+from backEnd import start
 
 
 # Ingirdnets and amount_Needed must be the same size
@@ -24,6 +24,18 @@ def queryProducts(Product_Name, SALE_PRICE, COST_TO_MAKE_IT, AMOUNT_ORDERED, PRO
         addProductIngriedents(PRODUCT_ID=PRODUCT_ID, INGREDIENT_ID=i)
 
     return result
+
+
+def searchProducts(PRODUCT_ID):
+    try:
+        PRODUCT_ID = int(PRODUCT_ID)
+        query = f"SELECT * FROM PRODUCTS WHERE PRODUCT_ID = {PRODUCT_ID}"
+    except:
+        query = "SELECT * FROM PRODUCTS"
+        
+    result = start.executeQuery(query=query)
+    return result
+    
 
 # COMPLTEED
 def addProductIngriedents(PRODUCT_ID, INGREDIENT_ID, AMOUNT_NEED):

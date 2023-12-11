@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul>
+        <li>
+            <h1 class="topleft">Tracker</h1>
+        </li>
+
+
+        <li> <a onclick="excutePopup('connect', null)">Connect</a> </li>
+
+
+
+        <li>
+            <a href="#">Search</a>
+                <ul class="dropdown">
+                    <li><a href="#"onclick="excutePopup('customerS')">Customer</a></li>
+                    <li><a href="#" onclick="excutePopup('productS')">Product</a></li>
+                    <li><a href="#" onclick="excutePopup('ingridentS')">Ingrident</a></li>
+                    <li><a href="#" onclick="excutePopup('orderS')">Orders</a></li>
+                    <li><a href="#" onclick="excutePopup('supplierS')">Supplier</a></li>
+                    <li><a href="#" onclick="excutePopup('orderContentsS')">ORDERCONTENTS</a></li>
+                    <li><a href="#" onclick="excutePopup('IG_SUPPLIER')">IG_SUPPLIER</a></li>
+                </ul>
+      </li>
+
+
+
+      <li>
+        <a href="#">Functions</a>
+            <ul class="dropdown">
+                <li><a href="#"onclick="excutePopup('Request_Order')">Request_Order</a></li>
+                <li><a href="#" onclick="excutePopup('editIngrident')">Edit Ingridents</a></li>
+                <li><a href="#" onclick="excutePopup('whatYouNeed')">see Needed Ingridents</a></li>
+            </ul>
+    </li>
+
+
+
+
+ 
+
+ 
+
+
+    </ul>
+
+
+
+    <table border="1" id="table">
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+        </tr>
+        <tr>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+    </table>
+
+    <!--Error PopUp-->
+    <div class="popup" id="popUpError">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Error</h2>
+        <p id="Error_Message"></p>
+    </div>
+
+    <!--Succuse Pop Up-->
+    <div class="popup" id="popUpsuccess">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Success</h2>
+        <p id="Success_Message"></p>
+    </div>
+
+    <!--Connect Form-->
+    <div class="popup" id="connectInformation">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            
+            <label for="user">User:</label>
+            <input type="text" id="user" name="username">
+
+            <label for="Database">Database:</label>
+            <input type="text" id="Database" name="username">
+
+   
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <label for="port">Port:</label>
+            <a> It is reccomeneded that you leave this empty</a>
+            <input type="text" id="port" name="password">
+        
+            <button type="button" id="submitButton">Submit</button>
+
+          </form>
+    </div>
+
+
+    <!--Add Customer Form-->
+    <div class="popup" id="addCustomerForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            
+            <label for="FNAME">FNAME:</label>
+            <input type="text" id="FNAME" name="username">
+
+            <label for="LNAME">LNAME:</label>
+            <input type="text" id="LNAME" name="username">
+
+   
+            <label for="CUSTOMER_ID">CUSTOMER_ID:</label>
+            <input type="number" id="CUSTOMER_ID" name="username">
+
+        
+            <button type="button" id="submitButton" onclick="addCustomer()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="addProductForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            
+            <label for="PRODUCT_NAME_A">Product Name:</label>
+            <input type="text" id="PRODUCT_NAME_A" name="username">
+
+            <label for="SALE_PRICE_A">SALE PRICE:</label>
+            <input type="number" id="SALE_PRICE_A" name="username">
+
+   
+            <label for="COST_A">COST:</label>
+            <input type="number" id="COST_A" name="username">
+
+            <label for="PRODUCT_ID_A">PRODUCT_ID:</label>
+            <input type="number" id="PRODUCT_ID_A" name="username">
+
+        
+            <button type="button" id="submitButton" onclick="addProduct()">Submit</button>
+
+          </form>
+    </div>
+
+    <!--Search Customer Form-->
+    <div class="popup" id="searchCustomerForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+
+   
+            <label for="CUSTOMER_ID_S">CUSTOMER_ID:</label>
+            <input type="number" id="CUSTOMER_ID_S" name="username">
+
+        
+            <button type="button" id="submitButton" onclick="searchCustomer()">Submit</button>
+
+          </form>
+    </div>
+
+
+    <div class="popup" id="searchProductForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="PRODUCT_ID_S">PRODUCT_ID:</label>
+            <input type="number" id="PRODUCT_ID_S" name="username">
+
+            <button type="button" id="submitButton" onclick="searchProduct()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="searchINGREDIENTSForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="INGREDIENTS_ID_S">INGREDIENTS_ID:</label>
+            <input type="number" id="INGREDIENTS_ID_S" name="username">
+
+            <button type="button" id="submitButton" onclick="searchINGREDIENTS()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="searchSUPPLIERForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="SUPPLIER_ID_S">SUPPLIER_ID:</label>
+            <input type="number" id="SUPPLIER_ID_S" name="username">
+
+            <button type="button" id="submitButton" onclick="searchSUPPLIER()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="searchORDERForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="ORDER_ID_S">ORDER_ID:</label>
+            <input type="number" id="ORDER_ID_S" name="username">
+
+            <button type="button" id="submitButton" onclick="searchOrder()">Submit</button>
+
+          </form>
+    </div>
+
+
+    <div class="popup" id="searchORDERCONTENTS">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="ORDER_ID_S_2">ORDER_ID:</label>
+            <input type="number" id="ORDER_ID_S_2" name="username">
+
+            <button type="button" id="submitButton" onclick="searchOrderContents()">Submit</button>
+
+          </form>
+    </div>
+
+
+    <div class="popup" id="IG_SUPPLIER_FORM">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+
+
+            <label for="INGREDIENTS_ID_IG">INGREDIENTS_ID:</label>
+            <input type="number" id="INGREDIENTS_ID_IG" name="username">
+
+            <button type="button" id="submitButton" onclick="searchIG_SUPPLIER()">Submit</button>
+
+
+
+          </form>
+    </div>
+
+
+
+
+
+    <!--Function Forms-->
+
+    <div class="popup" id="requestOrderForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+
+            <label for="CUSTOMER_ID_S">CUSTOMER_ID:</label>
+            <input type="number" id="CUSTOMER_ID_FUNCTION1" name="username">
+
+
+            <label for="PRODUCT_ID_Function">Product_ID's:</label>
+            <p>Enter as a comma seperated list</p>
+            <input type="text" id="PRODUCT_ID_FUNCTION1" name="username">
+
+            <label for="GOAL_TIME">GOAL TIME</label>
+            <p>Enter as minutes after current time</p>
+            <input type="text" id="GOAL_TIME" name="username">
+
+            <button type="button" id="submitButton" onclick="requestOrder()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="editIngridentForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="Ingrident_ID_F_2">Ingrident_ID:</label>
+            <input type="number" id="Ingrident_ID_F_2" name="username">
+
+            <label for="COST_F_2">COST:</label>
+            <input type="number" id="COST_F_2" name="username" step="any">
+
+            <label for="SUPPLIER_ID_F_2">NEW SUPPLIER_ID:</label>
+            <input type="number" id="SUPPLIER_ID_F_2" name="username">
+
+            <button type="button" id="submitButton" onclick="editIngrident()">Submit</button>
+
+          </form>
+    </div>
+
+    <div class="popup" id="whatYouNeedForm">
+        <button onclick="closePopup()" style="position: absolute; top: 5px; right: 5px;">X</button>
+        <h2>Connect to localhost</h2>
+        <form id="myForm">
+            <label for="SUPPLIER_ID_F_3">SUPPLIER_ID:</label>
+            <input type="number" id="SUPPLIER_ID_F_3" name="username">
+
+            <button type="button" id="submitButton" onclick="seeIngridentsNeeded()">Submit</button>
+
+          </form>
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/connect.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popUp.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sendData.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popUpCommands.js') }}"></script>
+
+</body>
+</html>
